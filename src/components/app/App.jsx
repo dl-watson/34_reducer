@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 
 const ACTIONS = {
   UNDO: "undo",
@@ -48,6 +48,8 @@ const useRecord = (init) => {
   const record = (val) => {
     dispatch({ type: ACTIONS.CURRENT, payload: val });
   };
+
+  const { current } = state;
 
   return {
     undo,
