@@ -39,10 +39,12 @@ const App = () => {
       <button onClick={redo}>redo</button>
       <input
         type="color"
+        data-testid="color-input"
         value={current}
         onChange={({ target }) => record(target.value)}
       />
       <div
+        data-testid="color-display"
         style={{ backgroundColor: current, width: "10rem", height: "10rem" }}
       ></div>
     </>
