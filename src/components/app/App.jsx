@@ -1,12 +1,29 @@
 import React, { useState, useReducer } from "react";
 
-const reducer = () => {};
+const ACTIONS = {
+  UNDO: "undo",
+  REDO: "redo",
+  RECORD: "record",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.UNDO:
+      return {
+        after: [state.current, ...state.after],
+        current: state.before[state.before.length - 1],
+        before: state.before.slice(0, -1),
+      };
+    case ACTIONS.REDO:
+      return {};
+    case ACTIONS.RECORD:
+      return {};
+    default:
+      return state;
+  }
+};
 
 const useRecord = (init) => {
-  const [before, setBefore] = useState([]);
-  const [current, setCurrent] = useState(init);
-  const [after, setAfter] = useState([]);
-
   const [state, dispatch] = useReducer(reducer, {
     before: [],
     current: init,
@@ -14,9 +31,7 @@ const useRecord = (init) => {
   });
 
   const undo = () => {
-    setAfter((after) => [current, ...after]);
-    setCurrent(before[before.length - 1]);
-    setBefore((before) => before.slice(0, -1));
+    dispatch({ type: ACTIONS.UNDO });
   };
 
   const redo = () => {
