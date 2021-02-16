@@ -15,7 +15,11 @@ const reducer = (state, action) => {
         before: state.before.slice(0, -1),
       };
     case ACTIONS.REDO:
-      return {};
+      return {
+        before: [...state.before, state.current],
+        current: state.after[0],
+        after: state.after.slice(1),
+      };
     case ACTIONS.RECORD:
       return {};
     default:
@@ -35,9 +39,7 @@ const useRecord = (init) => {
   };
 
   const redo = () => {
-    setBefore((before) => [...before, current]);
-    setCurrent(after[0]);
-    setAfter((after) => after.slice(1));
+    dispatch({ type: ACTIONS.REDO });
   };
 
   const record = (val) => {
