@@ -4,14 +4,20 @@ import { ACTIONS } from "../../actions/colorActions";
 
 const App = () => {
   const [state, dispatch] = useReducer(colorReducer, initialState);
-  const { current } = state;
+  const { current, after, before } = state;
 
   return (
     <>
-      <button onClick={() => dispatch({ type: ACTIONS.UNDO })} >
+      <button
+        onClick={() => dispatch({ type: ACTIONS.UNDO })}
+        disabled={!before.length}
+      >
         undo
       </button>
-      <button onClick={() => dispatch({ type: ACTIONS.REDO })} >
+      <button
+        onClick={() => dispatch({ type: ACTIONS.REDO })}
+        disabled={!after.length}
+      >
         redo
       </button>
       <input
