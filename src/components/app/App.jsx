@@ -1,33 +1,17 @@
 import React, { useReducer } from "react";
-import {
-  initialState,
-  ACTIONS,
-  colorReducer,
-} from "../../reducers/colorReducer";
+import { colorReducer, initialState } from "../../reducers/colorReducer";
+import { ACTIONS } from "../../actions/colorActions";
 
 const App = () => {
   const [state, dispatch] = useReducer(colorReducer, initialState);
-
   const { current } = state;
 
   return (
     <>
-      <button
-        onClick={() =>
-          dispatch({
-            type: ACTIONS.UNDO,
-          })
-        }
-      >
+      <button onClick={() => dispatch({ type: ACTIONS.UNDO })} >
         undo
       </button>
-      <button
-        onClick={() =>
-          dispatch({
-            type: ACTIONS.REDO,
-          })
-        }
-      >
+      <button onClick={() => dispatch({ type: ACTIONS.REDO })} >
         redo
       </button>
       <input

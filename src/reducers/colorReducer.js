@@ -1,8 +1,4 @@
-export const ACTIONS = {
-  UNDO: "undo",
-  REDO: "redo",
-  RECORD: "record",
-};
+import { ACTIONS } from "../actions/colorActions";
 
 export const initialState = {
   before: [],
